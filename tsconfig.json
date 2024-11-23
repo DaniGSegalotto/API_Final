@@ -18,6 +18,6 @@
       "strict": true,                        // Enable all strict type-checking options.
       "sourceMap": true
    },
-   "include": ["src/**/*.ts", "server.ts"],
+   "include": ["src/**/*.ts", "server.ts", "src/controllers/utilsControllers.ts"],
    "exclude": ["node_modules"]
 }
