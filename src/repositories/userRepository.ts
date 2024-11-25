@@ -30,13 +30,16 @@ class UserRepository implements UserRepository {
     }
 
     async update(id: number, user: Partial<Omit<UserEntity, 'id'>>): Promise<UserEntity | undefined> {
-        const userToUpdate = await this.getById(id)
-
+        const userToUpdate = await this.getById(id);
+    
         if (!userToUpdate) {
-            return undefined
+            return undefined; 
         }
-        return this.repository.merge(userToUpdate, user);
+    
+        const updatedUser = this.repository.merge(userToUpdate, user);
+        return this.repository.save(updatedUser);
     }
+    
 
     async delete(id: number): Promise<boolean> {
         const result = await this.repository.delete(id);

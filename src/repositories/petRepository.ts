@@ -30,13 +30,15 @@ class PetRepository implements PetRepository {
     }
 
     async update(id: number, pet: Partial<Omit<PetEntity, 'id'>>): Promise<PetEntity | undefined> {
-        const petToUpdate = await this.getById(id)
-
+        const petToUpdate = await this.getById(id);
+    
         if (!petToUpdate) {
-            return undefined
+            return undefined;
         }
-        return this.repository.merge(petToUpdate, pet);
+        const updatedPet = this.repository.merge(petToUpdate, pet);
+        return this.repository.save(updatedPet);
     }
+    
 
     async delete(id: number): Promise<boolean> {
         const result = await this.repository.delete(id);
